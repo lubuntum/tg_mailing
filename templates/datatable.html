@@ -1,0 +1,38 @@
+<table id="user-datatable">
+    <thead>
+        <tr>
+            <th><input type="checkbox" class="checkboxed-all new-checkbox" id="checkboxed-all"></th>
+            <th>ID</th>
+            <th>Имя</th>
+            <th>Телефон</th>
+            <th>Тип</th>
+            <th>Возраст</th>
+            <th>Язык(и)</th>
+            <th>Знания</th>
+            <th>Для чего</th>
+            <th>Дата</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in data %}
+        <tr>
+            <td><input type="checkbox" class="user-checkbox new-checkbox" data-row="{{ loop.index0 }}"></td>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>{{ row[3] }}</td>
+            <td>От {{ row[4][0] }} до {{ row[4][1] }}</td>
+            <td>{{ row[5]|join('\n') }}</td>
+            {% if 'Не указано' in row[6] %}
+                <td>{{ row[6] }}</td>
+            {% else %}
+                <td>{{ row[6]|join('\n') }}</td>
+            {% endif %}
+            <td>{{ row[7]|join(', ') }}</td>
+            <td>{{ row[8] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='js/get_users_ids.js') }}"></script>
+</table>

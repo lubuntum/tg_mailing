@@ -6,3 +6,5 @@ def clearUpload():
     for i in fileList:
         file = os.path.join(UPLOAD_FILES_DIRECTORY_PATH, i)
         os.remove(file)
+
+        #12312312

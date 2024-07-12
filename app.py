@@ -16,6 +16,7 @@ originUserData = getDataFromDB('/root')
 recipientsList = []
 
 #Aboba
+#1234
 
 #---------
 #Выполняется при загрузке и перезагрузке страницы!

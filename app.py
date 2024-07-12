@@ -15,6 +15,7 @@ app = Flask(__name__)
 originUserData = getDataFromDB('/root')
 recipientsList = []
 
+#Aboba
 
 #---------
 #Выполняется при загрузке и перезагрузке страницы!

@@ -1,0 +1,272 @@
+* {
+    font-family: sans-serif;
+    margin: 0 auto;
+}
+
+:root {
+    --menu-width: 300px;
+    --menu-right-hidden: -310px;
+    --menu-right: 10px;
+
+    --text-color: black;
+    --text-color-alternative: #f7f8fc;
+    --text-color-alternative-second: #818cd5;
+    --elements-background-color: #818cd5;
+    --elements-background-color-alternative: #f7f8fc;
+    --hover-color: #4051bf;
+
+    --coolor0: #ff6174;
+    --coolor1: #768fff;
+    --coolor2: #5bb070;
+    --coolor3: #725a83;
+    --coolor4: #3b3d6c;
+}
+
+p, a, i {
+    margin-bottom: 0;
+    font-size: 18px;
+    color: var(--text-color-alternative);
+    font-weight: 600;
+}
+a, label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.head-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 10px;
+    padding: 10px;
+}
+.head-box {
+    display: flex;
+    align-items: center;
+    background-color: var(--elements-background-color);
+    height: 50px;
+    width: 100%;
+    border-radius: 5px 0 0 5px;
+}
+.head-box p {
+    margin: 0 auto;
+    margin-left: 15px;
+}
+.btns-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    padding: 20px;
+    background-color: var(--elements-background-color);
+    height: 50px;
+    border-radius: 0 5px 5px 0;
+}
+.btns-box a i {
+    transition: all .2s ease;
+}
+.btns-box a:hover > i {
+    cursor: pointer;
+    color: var(--hover-color);
+}
+input[type='checkbox'] {
+    appearance: none;
+    -webkit-appearance: none;
+    height: 20px;
+    min-height: 20px;
+    width: 20px;
+    min-width: 20px;
+    background-color: var(--elements-background-color-alternative);
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, .25);
+}
+input[type='checkbox']::after {
+    font-family: 'Font Awesome 6 Free';
+    content: '\f00c';
+    font-weight: 900;
+    font-size: 15px;
+    color: var(--text-color-alternative-second);
+    display: none;
+}
+input[type='checkbox']:checked:after {
+    display: block;
+}
+.btn {
+    width: 100%;
+    background-color: var(--elements-background-color-alternative);
+    color: var(--text-color-alternative-second);
+    font-size: 16px;
+    font-weight: 500;
+    height: 35px;
+}
+
+
+
+
+
+/*Стили для меню фильтрации*/
+#select-filter {
+    display: none;
+}
+.filter-box {
+    overflow: hidden;
+}
+.filter-input {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    position: fixed;
+    z-index: 9999;
+    top: 70px;
+    right: var(--menu-right-hidden);
+    width: var(--menu-width);
+    background-color: var(--elements-background-color);
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, .25);
+    transition: right .2s ease;
+}
+#select-filter:checked ~ .filter-input {
+    right: var(--menu-right);
+}
+/*Стили для select'а*/
+select {
+    width: 100%;
+    height: 30px;
+    border: none;
+    color: var(--text-color);
+    border-radius: 5px;
+    text-align: center;
+}
+/*Стили для фильтрации по возрасту*/
+.filter-input .filter-age-range {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+}
+.filter-input .filter-age-range .filter-age-range-field {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    width: 100%;
+    align-items: center;
+}
+.filter-input .filter-age-range .filter-age-range-field span {
+    margin: 0 auto;
+    margin: 0px;
+    text-align: start;
+    color: #f7f8fc;
+    font-size: 16px;
+    font-weight: 500;
+}
+.filter-input .filter-age-range .filter-age-range-field input {
+    width: 100%;
+    border: none;
+    text-align: center;
+    border-radius: 5px;
+    color: var(--text-color);
+}
+/*Стили для фильтрации по языкам*/
+.filter-input .filter-language {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+}
+.filter-input .filter-language .filter-language-checkbox {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    width: 100%;
+    align-items: center;
+}
+.filter-input .filter-language .filter-language-checkbox label {
+    margin: 0 auto;
+    margin-left: 0px;
+    text-align: start;
+}
+.filter-input .filter-language .filter-language-checkbox label p {
+    font-weight: 500;
+    font-size: 16px;
+    transition: all .2s ease;
+}
+.filter-input .filter-language .filter-language-checkbox label:hover > p {
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+
+
+
+/*Стили для меню отправки*/
+#select-send {
+    display: none;
+}
+.send-box {
+    overflow: hidden;
+}
+.send-input {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    position: fixed;
+    z-index: 9999;
+    top: 70px;
+    right: var(--menu-right-hidden);
+    width: var(--menu-width);
+    background-color: var(--elements-background-color);
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, .25);
+    transition: right .2s ease;
+}
+#select-send:checked ~ .send-input {
+    right: var(--menu-right);
+}
+.send-input textarea {
+    border-radius: 5px;
+    min-height: 100px;
+    max-height: 400px;
+    color: var(--text-color);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.send-input .file-output {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 0;
+    background-color: var(--elements-background-color-alternative);
+    min-height: 30px;
+    width: 100%;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-color);
+    margin-bottom: 0;
+    list-style: none;
+}
+.send-input .file-output li {
+    text-decoration: none;
+    list-style: none;
+    margin: 0 auto;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+input[type='datetime-local'] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+}

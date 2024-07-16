@@ -2,8 +2,8 @@ import threading
 from datetime import datetime
 
 from flask import Flask, render_template, request, jsonify
-from db_get_data import getDataFromDB
-from data_filter import filtering
+from n_db_get_data import getDataFromDB
+from n_filter import filterFunc
 from tg_bot_mailing import sendMessageWithFiles, sendMessageWithoutFiles
 
 from clearUpload import clearUpload
@@ -15,9 +15,6 @@ app = Flask(__name__)
 originUserData = getDataFromDB('/root')
 recipientsList = []
 
-#Aboba
-#1234
-
 #---------
 #Выполняется при загрузке и перезагрузке страницы!
 #Очищается список получателей RecipientsList
@@ -27,8 +24,7 @@ recipientsList = []
 @app.route('/')
 def index():
     recipientsList.clear()
-    clearUpload()
-    return render_template('app.html', data=originUserData)
+    return render_template('n_app.html', dataUsers = originUserData)
 
 
 #---------
@@ -37,10 +33,20 @@ def index():
 #Далее в контейнер с таблицей загружается новый шаблон (datatable.html) и туда подгружаются фильтрованые данные
 #Также при выполнении фильтрации, очищается список получателей RecipientsList
 #---------
-@app.route('/filter_and_refresh_data', methods=['POST'])
+@app.route('/filter_data', methods=['POST'])
 def getFilterData():
     recipientsList.clear()
-    return render_template('datatable.html', data=filtering(originUserData, request.json['checkboxInput'], request.json['selectInput'], request.json['fromTextInput'], request.json['toTextInput']))
+    if request.json['filterType'] == 0:
+        requestData = {
+            'personType': request.json['personType'],
+            'personAgeFrom': request.json['personAgeFrom'],
+            'personAgeTo': request.json['personAgeTo'],
+            'languages': request.json['languages']
+        }
+        filteredUserData = filterFunc(originUserData, requestData)
+        return render_template('n_table.html', dataUsers = filteredUserData)
+    else:
+        return render_template('n_table.html', dataUsers = originUserData)
 
 
 #---------

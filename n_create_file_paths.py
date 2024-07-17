@@ -8,7 +8,9 @@ def createFilePaths(files):
     filePaths = [file for file in files if os.path.isfile(os.path.join(UPLOAD_FILES_DIRECTORY_PATH, file))]
     filePaths = [os.path.join(UPLOAD_FILES_DIRECTORY_PATH, file) for file in filePaths]
     return filePaths
-
+def clearFiles(filePaths):
+    for path in filePaths:
+        os.remove(path)
 
 #--->#fileList = os.listdir(UPLOAD_FILES_DIRECTORY_PATH) #Скорее всего тут просто добавить переданный агрумент files
 #--->#print(f'From OS -> {fileList}')

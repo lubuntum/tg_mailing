@@ -9,7 +9,7 @@ from n_filter import filterFunc
 
 from n_clear_upload import clearUpload
 from n_add_to_upload import addToUpload
-from n_create_file_paths import createFilePaths
+from n_create_file_paths import *
 
 from tg_bot_mailing import sendMessageWithFiles, sendMessageWithoutFiles
 
@@ -73,6 +73,7 @@ def sendMessageToUsers(messageText, files, pickedUsers):
     filePaths = createFilePaths([file.filename for file in files])
     if len(filePaths) > 0:
         sendMessageWithFiles(pickedUsers, messageText, filePaths)
+        clearFiles(filePaths)
     else:
         sendMessageWithoutFiles(pickedUsers, messageText)
     #После отправки можно реализовать метод для удаление текущих files ибо они больше не нудны

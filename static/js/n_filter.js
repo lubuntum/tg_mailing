@@ -44,7 +44,10 @@ $(document).ready(function() {
 
 /*Отправка запроса на бэк и получение новых данных для таблицы и дальнейшего ее отображения*/
 function handleFilterData(filterData) {
-    $('#all-user-checkbox, .user-checkbox').prop('checked', false);
+    $('#all-user-checkbox').prop('checked',false);
+    $('.user-checkbox').each(function() {
+        $(this).prop('checked',false);
+    });
     $.ajax({
         url: '/filter_data',
         type: 'POST',

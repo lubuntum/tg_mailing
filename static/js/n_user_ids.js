@@ -7,7 +7,7 @@ $(document).ready(function() {
             $('.user-checkbox').each(function() {
                 $('.user-checkbox').prop('checked', true)
                 idToPush = $(this).closest('tr').find('td:eq(1)').text()
-                ids.push(parseInt(idToPush))
+                ids.push(idToPush)
             })
             console.log(ids)
         } else {
@@ -25,11 +25,11 @@ $(document).ready(function() {
         if (this.checked) {
             $(this).prop('checked', true)
             idToPush = $(this).closest('tr').find('td:eq(1)').text()
-            ids.push(parseInt(idToPush))
+            ids.push(idToPush)
             console.log(ids)
         } else {
             $(this).prop('checked', false)
-            indexToDelete = ids.indexOf(parseInt($(this).closest('tr').find('td:eq(1)').text()))
+            indexToDelete = ids.indexOf($(this).closest('tr').find('td:eq(1)').text())
             if (indexToDelete > -1) {
                 ids.splice(indexToDelete, 1)
             }

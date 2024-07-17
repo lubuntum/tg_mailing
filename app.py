@@ -46,7 +46,7 @@ def getFilterData():
 def sendMessage():
     addToUpload(request.files.getlist('files'))
     sendMessageToUsers(request.form.get('message'), 
-                       request.files.getlist('files'), 
+                       request.files.getlist('files'),
                        json.loads(request.form.get('ids')))
     return jsonify('_success: /send_message. Сообщение отправлено!')
 
@@ -59,7 +59,7 @@ def delayMessage():
     delayMessageTimer(request.form.get('date'), 
                       request.form.get('time'),
                       request.form.get('message'), 
-                      request.files.getlist('files'), 
+                      request.files.getlist('files'),
                       json.loads(request.form.get('ids')))
     return jsonify('_success: /delay_message. Сообщение отложено!')
 

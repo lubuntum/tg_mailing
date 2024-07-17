@@ -1,4 +1,6 @@
 import threading
+import time
+
 from config import UPLOAD_FILES_DIRECTORY_PATH
 
 fileLock = threading.Lock()
@@ -8,6 +10,7 @@ def addToUpload(files):
         #--->
         fileLock.acquire()
         try:
+            file.filename = f'{file.filename}_{int(time.time()*1000)}'
             savePath = str(UPLOAD_FILES_DIRECTORY_PATH + '/' + file.filename).encode()
             with open(savePath, 'wb') as f:
                 file.save(f)

@@ -1,4 +1,7 @@
+import os.path
+
 import telebot
+import re
 from config import BOT_TOKEN
 
 bot = telebot.TeleBot(token=BOT_TOKEN)
@@ -15,7 +18,7 @@ def sendMessageWithFiles(userIds, message, paths):
         try:
             for file in paths:
                 with open(file, 'rb') as f:
-                    bot.send_document(user, f, disable_notification=True)
+                    bot.send_document(user, f,visible_file_name= re.sub(r'_\d*$', '', os.path.basename(file)), disable_notification=True)
                 print(f'File: {file} succesfuly send to user: {user}')
         except Exception as e:
             print(f'Failed to send files to user: {user}. Key error: {str(e)}')

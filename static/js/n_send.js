@@ -54,7 +54,7 @@ $(document).ready(function() {
             return
         }
         formData.append('message', messageText)
-        formData.append('ids', ids)
+        formData.append('ids', JSON.stringify(ids))
 
         handleFormData(formData)
     })
@@ -79,7 +79,7 @@ $(document).ready(function() {
             return
         }
         formData.append('message', messageText)
-        formData.append('ids', ids)
+        formData.append('ids', JSON.stringify(ids))
         handleDelayFormData(formData)
     })
 })
@@ -94,6 +94,7 @@ function handleFormData(formData) {
         success: function(response) {
             console.log(response)
             alert('Сообщение доставлено!')
+            clearCheckBoxes()
         }
     })
 }
@@ -108,6 +109,12 @@ function handleDelayFormData(formData) {
         success: function(response) {
             console.log(response)
             alert('Сообщение отложено!')
+            clearCheckBoxes()
         }
     })
+}
+function clearCheckBoxes(){
+    ids = []
+    $('.user-checkbox').each(function() {$('.user-checkbox').prop('checked', false)})
+    $('#all-user-checkbox').prop('checked', false)
 }

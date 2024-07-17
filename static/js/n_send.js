@@ -56,7 +56,7 @@ $(document).ready(function() {
         formData.append('message', messageText)
         formData.append('ids', JSON.stringify(ids))
 
-        handleFormData(formData)
+        handleFormData(formData, '/send_message')
     })
 })
 //Добавить массив выбранных user
@@ -80,13 +80,13 @@ $(document).ready(function() {
         }
         formData.append('message', messageText)
         formData.append('ids', JSON.stringify(ids))
-        handleDelayFormData(formData)
+        handleFormData(formData, '/delay_message')
     })
 })
 
-function handleFormData(formData) {
+function handleFormData(formData, url) {
     $.ajax({
-        url: '/send_message',
+        url: url,
         type: 'POST',
         data: formData,
         processData: false,
@@ -99,20 +99,6 @@ function handleFormData(formData) {
     })
 }
 
-function handleDelayFormData(formData) {
-    $.ajax({
-        url: '/delay_message',
-        type: 'POST',
-        data: formData,
-        processData: false,
-        contentType: false,
-        success: function(response) {
-            console.log(response)
-            alert('Сообщение отложено!')
-            clearCheckBoxes()
-        }
-    })
-}
 function clearCheckBoxes(){
     ids = []
     $('.user-checkbox').each(function() {$('.user-checkbox').prop('checked', false)})

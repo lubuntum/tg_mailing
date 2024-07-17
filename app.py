@@ -96,10 +96,11 @@ def getDataFromPage():
 #---------
 @app.route('/send_message', methods=['POST'])
 def sendMessage():
-    addToUpload(request.files.getlist('files'))
+    print(request.form.get('ids'))
+    #addToUpload(request.files.getlist('files'))
 
-    sendMessageToUsers(request.form.get('messageText'), request.files.getlist('files'), recipientsList)
-    return jsonify('_suc: /send_message. Сообщение отправлено!', recipientsList)
+    #sendMessageToUsers(request.form.get('message'), request.files.getlist('files'), request.form.get('ids'))
+    return jsonify('_suc: /send_message. Сообщение отправлено!')
 
 def sendMessageToUsers(messageText, files, pickedUsers):#Только данные
 
@@ -117,7 +118,7 @@ def sendMessageToUsers(messageText, files, pickedUsers):#Только данны
 def delayMessage():
     addToUpload(request.files.getlist('files'))
     delayMessageTimer(request.form.get('date'), request.form.get('time'),
-                      request.form.get('messageText'), request.files.getlist('files'), pickedUsers=recipientsList)
+                      request.form.get('message'), request.files.getlist('files'), pickedUsers=request.form.get('ids'))
     return jsonify('_suc: /delay_message. Отложено!', recipientsList)
 
 def delayMessageTimer(date, time, messageText, files, pickedUsers):

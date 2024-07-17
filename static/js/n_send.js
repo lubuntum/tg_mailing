@@ -1,3 +1,4 @@
+
 var allFiles = []
 
 function addFilesToFormData(formData) {
@@ -40,7 +41,7 @@ $(document).ready(function() {
         console.log('Pushed files: ', allFiles)
     })
 })
-
+//Добавить массив выбранных user
 $(document).ready(function() {
     $('#send-message').click(function() {
         var formData = new FormData()
@@ -53,11 +54,12 @@ $(document).ready(function() {
             return
         }
         formData.append('message', messageText)
+        formData.append('ids', ids)
 
         handleFormData(formData)
     })
 })
-
+//Добавить массив выбранных user
 $(document).ready(function() {
     $('#delay-send-message').click(function() {
         var formData = new FormData()
@@ -77,7 +79,7 @@ $(document).ready(function() {
             return
         }
         formData.append('message', messageText)
-
+        formData.append('ids', ids)
         handleDelayFormData(formData)
     })
 })

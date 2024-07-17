@@ -62,16 +62,16 @@
                 <input type="checkbox" id="select-send">
                 <label for="select-send"><a><i class='bx bx-send'></i></a></label>
                 <div class="send-input" id="send-input">
-                    <textarea></textarea>
+                    <textarea id="text-area"></textarea>
 
-                    <input type="file" multiple>
-                    <ul id="file-output" class="file-output"><li>DAsdas</li></ul>
+                    <input type="file" id="file-input" multiple>
+                    <ul class="file-output" id="file-output"></ul>
 
-                    <button class="btn">Отправить</button>
+                    <button class="btn" id="send-message">Отправить</button>
 
-                    <input type="datetime-local">
+                    <input type="datetime-local" id="date-input">
 
-                    <button class="btn">Отложить</button>
+                    <button class="btn" id="delay-send-message">Отложить</button>
                 </div>
             </div>
 
@@ -152,5 +152,6 @@
     <script src="{{ url_for('static', filename='js/n_menu_change.js') }}"></script>
     <script src="{{ url_for('static', filename='js/n_user_ids.js') }}"></script>
     <script src="{{ url_for('static', filename='js/n_filter.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/n_send.js') }}"></script>
 </body>
 </html>

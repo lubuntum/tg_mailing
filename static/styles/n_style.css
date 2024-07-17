@@ -109,10 +109,10 @@ input[type='checkbox']:checked:after {
 
 
 
-
 /*Стили для меню фильтрации*/
 #select-filter {
-    display: none;
+    position: absolute;
+    opacity: 0;
 }
 .filter-box {
     overflow: hidden;
@@ -206,7 +206,8 @@ select {
 
 /*Стили для меню отправки*/
 #select-send {
-    display: none;
+    position: absolute;
+    opacity: 0;
 }
 .send-box {
     overflow: hidden;
@@ -240,9 +241,10 @@ select {
 .send-input .file-output {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: start;
+    align-items: start;
     padding-left: 0;
+    padding: 5px;
     background-color: var(--elements-background-color-alternative);
     min-height: 30px;
     width: 100%;
@@ -257,8 +259,16 @@ select {
     text-decoration: none;
     list-style: none;
     margin: 0 auto;
-    font-size: 16px;
+    margin-bottom: 5px;
+    margin-left: 0;
+    font-size: 14px;
     font-weight: 500;
+}
+.btn-file-delete {
+    border: none;
+    background-color: transparent;
+    color: darkred;
+    font-size: 14px;
 }
 
 input[type='datetime-local'] {

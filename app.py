@@ -1,3 +1,4 @@
+import json
 import threading
 from datetime import datetime
 
@@ -12,9 +13,6 @@ from createFilePaths import createFilePaths
 
 app = Flask(__name__)
 
-originUserData = getDataFromDB('/root')
-recipientsList = []
-
 #---------
 #Выполняется при загрузке и перезагрузке страницы!
 #Очищается список получателей RecipientsList
@@ -23,7 +21,7 @@ recipientsList = []
 #---------
 @app.route('/')
 def index():
-    recipientsList.clear()
+    originUserData = getDataFromDB('/root')
     return render_template('n_app.html', dataUsers = originUserData)
 
 
@@ -35,7 +33,7 @@ def index():
 #---------
 @app.route('/filter_data', methods=['POST'])
 def getFilterData():
-    recipientsList.clear()
+    originUserData = getDataFromDB('/root')
     if request.json['filterType'] == 0:
         requestData = {
             'personType': request.json['personType'],
@@ -55,18 +53,18 @@ def getFilterData():
 #Полученые данные сохраняются в список RecipientsList который в дальнешем используется для отправки сообщений
 #Если пользователь убирает галочку с чекбокса то и соответственно и удалаюятся ID пользователей из RecipientsList по вышеописаному примеру
 #---------
-@app.route('/get_all_data', methods=['POST'])
-def getAllDataFromPage():
-    idList = request.json['idList']
-    checked = int(request.json['checked'])
-
-    if checked != 0:
-        for i in idList:
-            recipientsList.append(int(i['id']))
-    elif checked != 1:
-        recipientsList.clear()
-    print(f'From all {recipientsList}')
-    return jsonify('_suc: /get_all_data', recipientsList)
+# @app.route('/get_all_data', methods=['POST'])
+# def getAllDataFromPage():
+#     idList = request.json['idList']
+#     checked = int(request.json['checked'])
+#
+#     if checked != 0:
+#         for i in idList:
+#             recipientsList.append(int(i['id']))
+#     elif checked != 1:
+#         recipientsList.clear()
+#     print(f'From all {recipientsList}')
+#     return jsonify('_suc: /get_all_data', recipientsList)
 
 
 #---------
@@ -75,17 +73,17 @@ def getAllDataFromPage():
 #Полученые данные сохраняются в список RecipientsList который в дальнешем используется для отправки сообщений
 #Если пользователь убирает галочку с чекбокса то и соответственно и удалаюятся ID пользователей из RecipientsList по вышеописаному примеру
 #---------
-@app.route('/get_data', methods=['POST'])
-def getDataFromPage():
-    id = int(request.json['id'])
-    checked = int(request.json['checked'])
-
-    if id != '' and checked != 0:
-        recipientsList.append(id)
-    elif id != '' and checked != 1:
-        recipientsList.remove(id)
-    print(recipientsList)
-    return jsonify('_suc: /get_data', recipientsList)
+# @app.route('/get_data', methods=['POST'])
+# def getDataFromPage():
+#     id = int(request.json['id'])
+#     checked = int(request.json['checked'])
+#
+#     if id != '' and checked != 0:
+#         recipientsList.append(id)
+#     elif id != '' and checked != 1:
+#         recipientsList.remove(id)
+#     print(recipientsList)
+#     return jsonify('_suc: /get_data', recipientsList)
 
 
 
@@ -96,10 +94,8 @@ def getDataFromPage():
 #---------
 @app.route('/send_message', methods=['POST'])
 def sendMessage():
-    print(request.form.get('ids'))
-    #addToUpload(request.files.getlist('files'))
-
-    #sendMessageToUsers(request.form.get('message'), request.files.getlist('files'), request.form.get('ids'))
+    addToUpload(request.files.getlist('files'))
+    sendMessageToUsers(request.form.get('message'), request.files.getlist('files'), json.loads(request.form.get('ids')))
     return jsonify('_suc: /send_message. Сообщение отправлено!')
 
 def sendMessageToUsers(messageText, files, pickedUsers):#Только данные
@@ -118,8 +114,8 @@ def sendMessageToUsers(messageText, files, pickedUsers):#Только данны
 def delayMessage():
     addToUpload(request.files.getlist('files'))
     delayMessageTimer(request.form.get('date'), request.form.get('time'),
-                      request.form.get('message'), request.files.getlist('files'), pickedUsers=request.form.get('ids'))
-    return jsonify('_suc: /delay_message. Отложено!', recipientsList)
+                      request.form.get('message'), request.files.getlist('files'), pickedUsers=json.loads(request.form.get('ids')))
+    return jsonify('_suc: /delay_message. Отложено!')
 
 def delayMessageTimer(date, time, messageText, files, pickedUsers):
     fullDateStr = f'{date} {time}'

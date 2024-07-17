@@ -9,14 +9,29 @@ def filterFunc(users, filter):
     else: pass
 
     #Сортировка по возрасту
-    if filter['personAgeFrom'] < filter['personAgeTo']:
-        users = {key: value for key, value in users.items()
-                if len(re.findall(r'\b\d+\b', value['pAge'])) == 2 #Если в базе возраст указан так: "от 20 до 25 лет" - пример. Типа 2 целочисленных
-                and ((int(filter['personAgeFrom']) <= int(re.findall(r'\b\d+\b', value['pAge'])[0]) <= int(filter['personAgeTo'])) # И --- 1-ое целочисленное больше числа ОТ и меньше числа ДО
-                    or (int(filter['personAgeFrom']) <= int(re.findall(r'\b\d+\b', value['pAge'])[1]) <= int(filter['personAgeTo']))) # ИЛИ --- 2-ое целочисленное больше числа ОТ и меньше числа ДО
-                    or len(re.findall(r'\b\d+\b', value['pAge'])) == 1 #Если в базе возраст указан так: "страше 45" - пример. Типа 1 целочисленое
-                    and (int(filter['personAgeFrom']) <= int(re.findall(r'\b\d+\b', value['pAge'])[0]) <= int(filter['personAgeTo']))} # И --- целочисленное больше числа ОТ и меньше чилса ДО
-    else: pass
+    # if int(filter['personAgeFrom']) < int(filter['personAgeTo']):
+    #     print('aboba')
+    #     for key, value in users.items():
+    #         if len(re.findall(r'\b\d+\b', value['pAge'])) == 2:
+    #             print((str(re.findall(r'\b\d+\b', value['pAge'])[0]) + '>=' + str(filter['personAgeFrom'])), int(re.findall(r'\b\d+\b', value['pAge'])[0]) >= int(filter['personAgeFrom']),
+    #                   (str(re.findall(r'\b\d+\b', value['pAge'])[1]) + '<=' + str(filter['personAgeFrom'])), int(re.findall(r'\b\d+\b', value['pAge'])[1]) <= int(filter['personAgeFrom']),
+    #                   (str(re.findall(r'\b\d+\b', value['pAge'])[0]) + '<=' + str(filter['personAgeTo'])), int(re.findall(r'\b\d+\b', value['pAge'])[0]) <= int(filter['personAgeTo']),
+    #                   (str(re.findall(r'\b\d+\b', value['pAge'])[1]) + '>=' + str(filter['personAgeTo'])), int(re.findall(r'\b\d+\b', value['pAge'])[1]) >= int(filter['personAgeTo']), "\n")
+    #         else:
+    #             print((str(re.findall(r'\b\d+\b', value['pAge'])[0]) + '<=' + str(filter['personAgeFrom'])), int(re.findall(r'\b\d+\b', value['pAge'])[0]) <= int(filter['personAgeFrom']),
+    #                   (str(re.findall(r'\b\d+\b', value['pAge'])[0]) + '<=' + str(filter['personAgeTo'])), int(re.findall(r'\b\d+\b', value['pAge'])[0]) <= int(filter['personAgeTo']), "\n")
+            
+
+    #     users = {key: value for key, value in users.items()
+    #              if (len(re.findall(r'\b\d+\b', value['pAge'])) == 2 and
+    #                  (int(re.findall(r'\b\d+\b', value['pAge'])[0]) >= int(filter['personAgeFrom']) or
+    #                   int(re.findall(r'\b\d+\b', value['pAge'])[1]) <= int(filter['personAgeFrom']) or
+    #                   int(re.findall(r'\b\d+\b', value['pAge'])[0]) <= int(filter['personAgeTo']) or
+    #                   int(re.findall(r'\b\d+\b', value['pAge'])[1]) >= int(filter['personAgeTo']))) or
+    #                   (len(re.findall(r'\b\d+\b', value['pAge'])) == 1 and
+    #                    (int(re.findall(r'\b\d+\b', value['pAge'])[0]) <= int(filter['personAgeFrom']) or
+    #                     int(re.findall(r'\b\d+\b', value['pAge'])[0]) <= int(filter['personAgeTo'])))}
+    # else: pass
 
     #Сортировка по языкам
     languagesDict = {'english': 'Английский', 'german': 'Немецкий', 'french': 'Французский', 'spanish': 'Испанский', 'chinese': 'Китайский'}

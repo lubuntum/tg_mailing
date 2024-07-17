@@ -44,6 +44,10 @@ $(document).ready(function() {
 //Добавить массив выбранных user
 $(document).ready(function() {
     $('#send-message').click(function() {
+        if (ids.length === 0) {
+            alert("Выберите пользователей")
+            return
+        }
         var formData = new FormData()
 
         addFilesToFormData(formData)
@@ -62,6 +66,10 @@ $(document).ready(function() {
 //Добавить массив выбранных user
 $(document).ready(function() {
     $('#delay-send-message').click(function() {
+        if (ids.length === 0) {
+            alert("Выберите пользователей")
+            return
+        }
         var formData = new FormData()
 
         addFilesToFormData(formData)

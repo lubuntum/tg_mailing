@@ -111,8 +111,7 @@ input[type='checkbox']:checked:after {
 
 /*Стили для меню фильтрации*/
 #select-filter {
-    position: absolute;
-    opacity: 0;
+    display: none;
 }
 .filter-box {
     overflow: hidden;
@@ -206,8 +205,7 @@ select {
 
 /*Стили для меню отправки*/
 #select-send {
-    position: absolute;
-    opacity: 0;
+    display: none;
 }
 .send-box {
     overflow: hidden;
@@ -279,4 +277,15 @@ input[type='datetime-local'] {
     border: none;
     border-radius: 5px;
     text-align: center;
+}
+
+
+
+
+#select-timer {
+    display: none;
+}
+
+.timer-box {
+    display: none;
 }

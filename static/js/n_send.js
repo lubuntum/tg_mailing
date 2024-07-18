@@ -31,6 +31,7 @@ $(document).ready(function() {
 
     $('#file-output').on('click', '#btn-file-delete', function() {
         var fileName = $(this).parent().text().trim().replace('Удалить', '')
+
         $(this).parent().remove()
         var index = allFiles.findIndex(function(file) {
             return file.name === fileName
@@ -38,6 +39,8 @@ $(document).ready(function() {
         if (index !== -1) {
             allFiles.splice(index, 1)
         }
+        var fileInput = document.getElementById('file-input')
+        fileInput.value = ''
         console.log('Pushed files: ', allFiles)
     })
 })

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, session, redirect
+from flask import Flask, render_template, request, jsonify, session, redirect, url_for
 from flask_bcrypt import Bcrypt
 
 import json
@@ -32,7 +32,9 @@ def login():
     password = request.form.get('password')
     if authUser(username, password):
         return redirect('/')
-    return render_template('login.html')
+    return render_template('login.html', errorActive='active')
+
+
 @app.route('/login', methods=['GET'])
 def show_login_form():
     return render_template('login.html')
@@ -60,8 +62,6 @@ def getFilterData():
         return render_template('n_table.html', dataUsers = originUserData)
 
 
-
-
 @app.route('/send_message', methods=['POST'])
 def sendMessage():
     addToUpload(request.files.getlist('files'))
@@ -69,8 +69,6 @@ def sendMessage():
                        request.files.getlist('files'),
                        json.loads(request.form.get('ids')))
     return jsonify('_success: /send_message. Сообщение отправлено!')
-
-
 
 
 @app.route('/delay_message', methods = ['POST'])
@@ -82,8 +80,6 @@ def delayMessage():
                       request.files.getlist('files'),
                       json.loads(request.form.get('ids')))
     return jsonify('_success: /delay_message. Сообщение отложено!')
-
-
 
 
 def sendMessageToUsers(messageText, files, pickedUsers):
@@ -99,15 +95,13 @@ def sendMessageToUsers(messageText, files, pickedUsers):
     #После отправки можно реализовать метод для удаление текущих files ибо они больше не нудны
 
 
-
-
 def delayMessageTimer(date, time, messageText, files, pickedUsers):
     fullDateStr = f'{date} {time}'
     fullDate = datetime.strptime(fullDateStr, '%d.%m.%Y %H:%M')
     currentDate = datetime.now()
     delaySec = (fullDate - currentDate).total_seconds()
     #Поставить таймер
-    print(f'{messageText}, {files}, {date}, {time}')
+    #print(f'{messageText}, {files}, {date}, {time}')
     timer = threading.Timer(delaySec, sendMessageToUsers, args=[messageText, files, pickedUsers])
     timer.start()
 

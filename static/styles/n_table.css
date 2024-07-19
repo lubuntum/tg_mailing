@@ -9,13 +9,20 @@
     text-align: left;
     border-collapse: collapse;
 }
-.table::-webkit-scrollbar {
-    width: 0;
-}
 .table thead th, table tbody td {
     font-size: 14px;
     padding: 5px;
     height: 50px;
+}
+.table thead th:nth-child(1),
+.table tbody td:nth-child(1) {
+    padding-left: 15px;
+}
+.table thead th:nth-child(1) {
+    border-radius: 5px 0 0 0;
+}
+.table thead th:nth-child(10) {
+    border-radius: 0 5px 0 0;
 }
 .table thead th {
     background-color: #818cd5;

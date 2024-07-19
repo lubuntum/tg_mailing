@@ -3,28 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/auth.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/login.css') }}" type="text/css">
 </head>
 <body>
     <form method="POST" action="{{ url_for('login') }}">
         <div class = "login-wrapper">
             <div class="login-container">
-                <div class="input-data">
-                    <label for="username">Логин</label>
-                    <input type="text" id="username" name="username">
-                </div>
+                <input type="text" id="username" name="username" placeholder="Логин">
 
-                <div class="input-data">
-                    <label for="password">Пароль</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-                <div class="input-data">
-                    <input type="submit" value="Login">
-                <div>
+                <input type="password" id="password" name="password" required placeholder="Пароль">
 
+                <input type="submit" value="Войти">
+            </div>
+
+            <div class="error-container {{ errorActive }}">
+                <p>Неверно введены логин или пароль!</p>
             </div>
         </div>
     </form>
-
 </body>
 </html>

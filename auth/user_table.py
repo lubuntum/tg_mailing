@@ -7,5 +7,6 @@ def getUserByUsername(username):
     user = cursor.fetchone()
     db.close()
     return user
+
 def getDB():
     return sqlite3.connect('./database/database.db')

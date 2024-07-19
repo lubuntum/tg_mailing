@@ -1,12 +1,11 @@
 from flask import Flask, session
 from flask_bcrypt import Bcrypt
-import sqlite3
 
 from auth.user_table import getUserByUsername
-from config import SECRET_KEY
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
+
 def authUser(username, password):
     user = getUserByUsername(username)
     if user == None:

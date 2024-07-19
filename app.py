@@ -1,28 +1,43 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, session, redirect
 
 import json
 import threading
 from datetime import datetime
 
+from flask_bcrypt import Bcrypt
+
+from auth.auth_user import authUser
+from config import SECRET_KEY
 from n_db_get_data import getDataFromDB
 from n_filter import filterFunc
 
-from n_clear_upload import clearUpload
 from n_add_to_upload import addToUpload
 from n_create_file_paths import *
 
 from tg_bot_mailing import sendMessageWithFiles, sendMessageWithoutFiles
 
 app = Flask(__name__)
-
+bcrypt = Bcrypt(app)
 
 @app.route('/')
 def index():
+    if not session.get('logged_in'):
+        return redirect('/login')
     originUserData = getDataFromDB('/root')
     return render_template('n_app.html', dataUsers = originUserData)
 
 
+@app.route('/login', methods=['POST'])
+def login():
+    username = request.form.get('username')
+    password = request.form.get('password')
+    if authUser(username, password):
 
+        return redirect('/')
+    return render_template('login.html')
+@app.route('/login', methods=['GET'])
+def show_login_form():
+    return render_template('login.html')
 
 @app.route('/filter_data', methods=['POST'])
 def getFilterData():
@@ -45,7 +60,7 @@ def getFilterData():
 @app.route('/send_message', methods=['POST'])
 def sendMessage():
     addToUpload(request.files.getlist('files'))
-    sendMessageToUsers(request.form.get('message'), 
+    sendMessageToUsers(request.form.get('message'),
                        request.files.getlist('files'),
                        json.loads(request.form.get('ids')))
     return jsonify('_success: /send_message. Сообщение отправлено!')
@@ -56,9 +71,9 @@ def sendMessage():
 @app.route('/delay_message', methods = ['POST'])
 def delayMessage():
     addToUpload(request.files.getlist('files'))
-    delayMessageTimer(request.form.get('date'), 
+    delayMessageTimer(request.form.get('date'),
                       request.form.get('time'),
-                      request.form.get('message'), 
+                      request.form.get('message'),
                       request.files.getlist('files'),
                       json.loads(request.form.get('ids')))
     return jsonify('_success: /delay_message. Сообщение отложено!')
@@ -93,4 +108,5 @@ def delayMessageTimer(date, time, messageText, files, pickedUsers):
 
 
 if __name__ == "__main__":
+    app.secret_key = SECRET_KEY
     app.run()

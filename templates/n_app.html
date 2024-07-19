@@ -12,13 +12,14 @@
 <body>
     <div class="head-row">
         <div class="head-box">
-            <p>Language questionary database</p>
+            <p>{{ username }}</p>
         </div>
         <div class="btns-box">
             <div class="filter-box">
                 <input type="checkbox" id="select-filter">
                 <label for="select-filter"><a><i class='bx bx-filter'></i></a></label>
                 <div class="filter-input" id="filter-input">
+                    <label class="skuff">Тип:</label>
                     <select id="person-type">
                         <option disabled>Выберите тип:</option>
                         <option value="empty">Не учитывать</option>
@@ -26,6 +27,7 @@
                         <option value="child">Для ребенка</option>
                     </select>
 
+                    <label class="skuff">Возраст:</label>
                     <div class="filter-age-range">
                         <div class="filter-age-range-field">
                             <span>От:</span><input type="number" id="age-range-from" placeholder="1" value=1>
@@ -35,6 +37,7 @@
                         </div>
                     </div>
 
+                    <label class="skuff">Язык(и):</label>
                     <div class="filter-language">
                         <div class="filter-language-checkbox">
                             <input type="checkbox" class="language-checkbox" id="english"><label for="english"><p>Английский</p></label>
@@ -62,14 +65,17 @@
                 <input type="checkbox" id="select-send">
                 <label for="select-send"><a><i class='bx bx-send'></i></a></label>
                 <div class="send-input" id="send-input">
+                    <label class="skuff">Сообщение:</label>
                     <textarea id="text-area"></textarea>
 
+                    <label class="skuff">Файлы:</label>
                     <input class="file-input" type="file" id="file-input" multiple>
                     <label class="file-label" for="file-input">Выбрать файл(ы)</label>
                     <ul class="file-output" id="file-output"></ul>
 
                     <button class="btn" id="send-message">Отправить</button>
 
+                    <label class="skuff">Отложить на:</label>
                     <input type="datetime-local" id="date-input">
 
                     <button class="btn" id="delay-send-message">Отложить</button>
@@ -80,8 +86,11 @@
                 <input type="checkbox" id="select-timer">
                 <label for="select-timer"><a><i class='bx bx-time-five'></i></a></label>
             </div>
-            
-            
+        </div>
+        <div class="exit-box">
+            <form action="{{ url_for('logout') }}" method="POST">
+                <button type="submit"><i class='bx bx-exit'></i></button>
+            </form>
         </div>
     </div>
 

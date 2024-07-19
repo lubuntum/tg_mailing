@@ -1,19 +1,17 @@
 from flask import Flask, render_template, request, jsonify, session, redirect
+from flask_bcrypt import Bcrypt
 
 import json
 import threading
 from datetime import datetime
 
-from flask_bcrypt import Bcrypt
+from config import SECRET_KEY
 
 from auth.auth_user import authUser
-from config import SECRET_KEY
 from n_db_get_data import getDataFromDB
 from n_filter import filterFunc
-
 from n_add_to_upload import addToUpload
 from n_create_file_paths import *
-
 from tg_bot_mailing import sendMessageWithFiles, sendMessageWithoutFiles
 
 app = Flask(__name__)
@@ -23,8 +21,9 @@ bcrypt = Bcrypt(app)
 def index():
     if not session.get('logged_in'):
         return redirect('/login')
+    username = session['username']
     originUserData = getDataFromDB('/root')
-    return render_template('n_app.html', dataUsers = originUserData)
+    return render_template('n_app.html', dataUsers = originUserData, username = username)
 
 
 @app.route('/login', methods=['POST'])
@@ -32,12 +31,18 @@ def login():
     username = request.form.get('username')
     password = request.form.get('password')
     if authUser(username, password):
-
         return redirect('/')
     return render_template('login.html')
 @app.route('/login', methods=['GET'])
 def show_login_form():
     return render_template('login.html')
+
+
+@app.route('/logout', methods=['POST'])
+def logout():
+    session.clear()
+    return redirect('/login')
+
 
 @app.route('/filter_data', methods=['POST'])
 def getFilterData():

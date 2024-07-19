@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/auth.css') }}" type="text/css">
+</head>
+<body>
+    <form method="POST" action="{{ url_for('login') }}">
+        <div class = "login-wrapper">
+            <div class="login-container">
+                <div class="input-data">
+                    <label for="username">Логин</label>
+                    <input type="text" id="username" name="username">
+                </div>
+
+                <div class="input-data">
+                    <label for="password">Пароль</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="input-data">
+                    <input type="submit" value="Login">
+                <div>
+
+            </div>
+        </div>
+    </form>
+
+</body>
+</html>

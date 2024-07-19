@@ -62,7 +62,6 @@ a, label {
     padding: 20px;
     background-color: var(--elements-background-color);
     height: 50px;
-    border-radius: 0 5px 5px 0;
 }
 .btns-box a i {
     transition: all .2s ease;
@@ -70,6 +69,36 @@ a, label {
 .btns-box a:hover > i {
     cursor: pointer;
     color: var(--hover-color);
+}
+.exit-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    padding: 20px;
+    background-color: var(--elements-background-color);
+    height: 50px;
+    border-radius: 0 5px 5px 0;
+}
+.exit-box button {
+    display: flex;
+    border: none;
+    background-color: transparent;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+.exit-box button i {
+    transition: all .2s ease;
+}
+.exit-box button:hover > i {
+    cursor: pointer;
+    color: var(--hover-color);
+}
+.skuff {
+    color: var(--text-color-alternative);
+    margin-left: 0;
 }
 input[type='checkbox'] {
     appearance: none;
@@ -260,10 +289,11 @@ select {
     flex-direction: column;
     justify-content: start;
     align-items: start;
+    text-align: center;
     padding-left: 0;
     padding: 5px;
     background-color: var(--elements-background-color-alternative);
-    min-height: 30px;
+    min-height: 35px;
     width: 100%;
     border-radius: 5px;
     font-size: 16px;
@@ -275,10 +305,14 @@ select {
 .send-input .file-output li {
     text-decoration: none;
     list-style: none;
-    margin: 0 auto;
-    margin-left: 0;
+    margin: 0;
+    line-height: 23px;
     font-size: 14px;
     font-weight: 500;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
 }
 .btn-file-delete {
     border: none;
@@ -295,8 +329,9 @@ input[type='datetime-local'] {
     border: none;
     border-radius: 5px;
     text-align: center;
+    transition: all .2s ease;
+    cursor: pointer;
 }
-
 
 
 

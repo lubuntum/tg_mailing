@@ -97,6 +97,7 @@ def sendMessageToUsers(messageText, files, pickedUsers):
 
 def delayMessageTimer(date, time, messageText, files, pickedUsers):
     fullDateStr = f'{date} {time}'
+    print(fullDateStr)
     fullDate = datetime.strptime(fullDateStr, '%d.%m.%Y %H:%M')
     currentDate = datetime.now()
     delaySec = (fullDate - currentDate).total_seconds()
@@ -108,4 +109,4 @@ def delayMessageTimer(date, time, messageText, files, pickedUsers):
 
 if __name__ == "__main__":
     app.secret_key = SECRET_KEY
-    app.run()
+    app.run(host='0.0.0.0', port=int('5436'), debug=True)

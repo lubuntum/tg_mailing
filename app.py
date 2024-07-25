@@ -4,6 +4,7 @@ from flask_bcrypt import Bcrypt
 import json
 import threading
 from datetime import datetime
+import os
 
 from config import SECRET_KEY
 
@@ -109,4 +110,5 @@ def delayMessageTimer(date, time, messageText, files, pickedUsers):
 
 if __name__ == "__main__":
     app.secret_key = SECRET_KEY
-    app.run(host='0.0.0.0', port=int('5436'), debug=True)
+    app.run()
+    #app.run(host='0.0.0.0', port=int('5436'), debug=True)

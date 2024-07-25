@@ -5,11 +5,11 @@
             <th>Id</th>
             <th>Имя</th>
             <th>Номер</th>
-            <th>Тип</th>
             <th>Возраст</th>
             <th>Язык(и)</th>
             <th>Уровень(ни)</th>
             <th>Цель(и)</th>
+            <th>Ребенок</th>
             <th>Дата</th>
         </tr>
     </thead>
@@ -28,8 +28,6 @@
             {% else %}
                 <td>Не указано</td>
             {% endif %}
-
-            <td>{{ dataUsers[i].pType }}</td>
 
             <td>{{ dataUsers[i].pAge }}</td>
 
@@ -52,6 +50,12 @@
             </td>
 
             <td>{{ dataUsers[i].purpose|join(",<br>") | safe }}</td>
+            
+            {% if dataUsers[i].child != None %}
+                <td>{{ dataUsers[i].child }}</td>
+            {% else %}
+                <td>Ну указано</td>
+            {% endif %}
 
             <td>{{ dataUsers[i].date.replace(' ', '<br>') | safe }}</td>
         </tr>

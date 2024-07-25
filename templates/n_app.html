@@ -102,11 +102,11 @@
                     <th>Id</th>
                     <th>Имя</th>
                     <th>Номер</th>
-                    <th>Тип</th>
                     <th>Возраст</th>
                     <th>Язык(и)</th>
                     <th>Уровень(ни)</th>
                     <th>Цель(и)</th>
+                    <th>Ребенок</th>
                     <th>Дата</th>
                 </tr>
             </thead>
@@ -115,21 +115,19 @@
                 {% for i in dataUsers %}
                 <tr class="align-middle">
                     <td><input type="checkbox" class="user-checkbox" id="user-checkbox" data-row="{{ loop.index0 }}"></td>
-
+        
                     <td>{{ dataUsers[i].id }}</td>
-
+        
                     <td>{{ dataUsers[i].fName }}</td>
-
+        
                     {% if dataUsers[i].phone %}
                         <td>{{ dataUsers[i].phone }}</td>
                     {% else %}
                         <td>Не указано</td>
                     {% endif %}
-
-                    <td>{{ dataUsers[i].pType }}</td>
-
+        
                     <td>{{ dataUsers[i].pAge }}</td>
-
+        
                     <td>
                         {% for language in dataUsers[i].languages %}
                             <span class="unique-color-{{loop.index0}}">{{ language }}</span>
@@ -138,7 +136,7 @@
                             {% endif %}
                         {% endfor %}
                     </td>
-
+        
                     <td>
                         {% for level in dataUsers[i].levels %}
                             <span class="unique-color-{{loop.index0}}">{{ level }}</span>
@@ -147,9 +145,15 @@
                             {% endif %}
                         {% endfor %}
                     </td>
-
+        
                     <td>{{ dataUsers[i].purpose|join(",<br>") | safe }}</td>
-
+                    
+                    {% if dataUsers[i].child != None %}
+                        <td>{{ dataUsers[i].child }}</td>
+                    {% else %}
+                        <td>Ну указано</td>
+                    {% endif %}
+        
                     <td>{{ dataUsers[i].date.replace(' ', '<br>') | safe }}</td>
                 </tr>
                 {% endfor %}

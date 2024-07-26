@@ -26,17 +26,28 @@
                         <option value="adult">Для себя</option>
                         <option value="child">Для ребенка</option>
                     </select>
-
-                    <label class="skuff">Возраст:</label>
-                    <div class="filter-age-range">
-                        <div class="filter-age-range-field">
-                            <span>От:</span><input type="number" id="age-range-from" placeholder="1" value=1>
-                        </div>
-                        <div class="filter-age-range-field">
-                            <span>До:</span><input type="number" id="age-range-to" placeholder="99" value=99>
+                    <div class="age-filter-container">
+                        <label class="skuff">Возраст:</label>
+                        <div class="filter-age-range">
+                            <div class="filter-age-range-field">
+                                <span>От:</span><input type="number" id="age-range-from" placeholder="1" value=1>
+                            </div>
+                            <div class="filter-age-range-field">
+                                <span>До:</span><input type="number" id="age-range-to" placeholder="99" value=99>
+                            </div>
                         </div>
                     </div>
-
+                    <div class="age-filter-container">
+                        <label class="skuff">Возраст ребенка:</label>
+                        <div class="filter-age-range">
+                            <div class="filter-age-range-field">
+                                <span>От:</span><input type="number" id="child-age-range-from" placeholder="1" value=5>
+                            </div>
+                            <div class="filter-age-range-field">
+                                <span>До:</span><input type="number" id="child-age-range-to" placeholder="17" value=7>
+                            </div>
+                        </div>
+                    </div>
                     <label class="skuff">Язык(и):</label>
                     <div class="filter-language">
                         <div class="filter-language-checkbox">

@@ -52,7 +52,6 @@ def getFilterData():
     originUserData = getDataFromDB('/root')
     if request.json['filterType'] == 0:
         requestData = {
-            'personType': request.json['personType'],
             'personAgeFrom': request.json['personAgeFrom'],
             'personAgeTo': request.json['personAgeTo'],
             'languages': request.json['languages'],

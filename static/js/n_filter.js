@@ -5,7 +5,6 @@ $(document).ready(function() {
     $('#submit-filter').click(function(){
         filterData = {
             'filterType': 0,
-            'personType': $('#person-type').val(),
             'personAgeFrom': $('#age-range-from').val(),
             'personAgeTo': $('#age-range-to').val(),
             'childAgeFrom': $('#child-age-range-from').val(),
@@ -23,7 +22,6 @@ $(document).ready(function() {
 /*Сбросить фильтрацию*/
 $(document).ready(function() {
     $('#reset-filter').click(function(){
-        $('#person-type').val('empty');
         $('#age-range-from').val(1);
         $('#age-range-to').val(99);
         $('.language-checkbox').each(function() {
@@ -31,7 +29,6 @@ $(document).ready(function() {
         });
         filterData = {
             'filterType': 1,
-            'personType': $('#person-type').val(),
             'personAgeFrom': $('#age-range-from').val(),
             'personAgeTo': $('#age-range-to').val(),
             'languages': $('.language-checkbox:checked').map(function() {

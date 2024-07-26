@@ -1,29 +1,15 @@
 import re
-
+pTypeDict = {'adult': 'Для себя', 'child': 'Для ребенка', 'empty': ''}
 def filterFunc(users, filter):
 
     #Сортировка по типу
-    pTypeDict = {'adult': 'Для себя', 'child': 'Для ребенка', 'empty': ''}
+
     if pTypeDict[filter['personType']] != '':
         users = {key: value for key, value in users.items() if value['pType'] == pTypeDict[filter['personType']]}
     else: pass
-
-    #Сортировка по возрасту
-    if int(filter['personAgeFrom']) < int(filter['personAgeTo']):
-        users = {key: value for key, value in users.items()
-                 if (len(re.findall(r'\b\d+\b', value['pAge'])) == 2 and
-                     (int(re.findall(r'\b\d+\b', value['pAge'])[0]) <= int(filter['personAgeFrom']) and
-                      int(re.findall(r'\b\d+\b', value['pAge'])[1]) >= int(filter['personAgeFrom']) or
-                      int(re.findall(r'\b\d+\b', value['pAge'])[0]) <= int(filter['personAgeTo']) and
-                      int(re.findall(r'\b\d+\b', value['pAge'])[1]) >= int(filter['personAgeTo'])) or
-                     (int(re.findall(r'\b\d+\b', value['pAge'])[0]) >= int(filter['personAgeFrom']) and
-                      int(re.findall(r'\b\d+\b', value['pAge'])[0]) <= int(filter['personAgeTo'])) or
-                     (len(re.findall(r'\b\d+\b', value['pAge'])) == 1 and
-                      (int(re.findall(r'\b\d+\b', value['pAge'])[0]) >= int(filter['personAgeFrom']) and
-                       int(re.findall(r'\b\d+\b', value['pAge'])[0]) <= int(filter['personAgeTo']))))
-                }
-    else: pass
-
+    # Сортировка по возрасту
+    users = filterByAgeRange(users, filter, dataAgeKey='pAge', ageFromKey='personAgeFrom', ageToKey='personAgeTo')
+    users = filterByAgeRange(users, filter, dataAgeKey='child', ageFromKey='childAgeFrom', ageToKey= 'childAgeTo' )
     #Сортировка по языкам
     languagesDict = {'english': 'Английский', 'german': 'Немецкий', 'french': 'Французский', 'spanish': 'Испанский', 'chinese': 'Китайский'}
     if len(filter['languages']) != 0:
@@ -35,3 +21,20 @@ def filterFunc(users, filter):
 
 
     return users
+
+def filterByAgeRange(users, filter, dataAgeKey, ageFromKey, ageToKey):
+    if int(filter[ageFromKey]) < int(filter[ageToKey]):
+        return {key: value for key, value in users.items()
+                 if (len(re.findall(r'\b\d+\b', value[dataAgeKey])) == 2 and
+                     (int(re.findall(r'\b\d+\b', value[dataAgeKey])[0]) <= int(filter[ageFromKey]) and
+                      int(re.findall(r'\b\d+\b', value[dataAgeKey])[1]) >= int(filter[ageFromKey]) or
+                      int(re.findall(r'\b\d+\b', value[dataAgeKey])[0]) <= int(filter[ageToKey]) and
+                      int(re.findall(r'\b\d+\b', value[dataAgeKey])[1]) >= int(filter[ageToKey])) or
+                     (int(re.findall(r'\b\d+\b', value[dataAgeKey])[0]) >= int(filter[ageFromKey]) and
+                      int(re.findall(r'\b\d+\b', value[dataAgeKey])[0]) <= int(filter[ageToKey])) or
+                     (len(re.findall(r'\b\d+\b', value[dataAgeKey])) == 1 and
+                      (int(re.findall(r'\b\d+\b', value[dataAgeKey])[0]) >= int(filter[ageFromKey]) and
+                       int(re.findall(r'\b\d+\b', value[dataAgeKey])[0]) <= int(filter[ageToKey]))))
+                }
+    else:
+        return users

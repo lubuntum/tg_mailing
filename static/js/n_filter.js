@@ -8,6 +8,8 @@ $(document).ready(function() {
             'personType': $('#person-type').val(),
             'personAgeFrom': $('#age-range-from').val(),
             'personAgeTo': $('#age-range-to').val(),
+            'childAgeFrom': $('#child-age-range-from').val(),
+            'childAgeTo' : $('#child-age-range-to').val(),
             'languages': $('.language-checkbox:checked').map(function() {
                 return $(this).attr('id')
             }).get()

@@ -11,7 +11,8 @@ $(document).ready(function() {
             'childAgeTo' : $('#child-age-range-to').val(),
             'languages': $('.language-checkbox:checked').map(function() {
                 return $(this).attr('id')
-            }).get()
+            }).get(),
+            'withoutChild' : $('#child').prop("checked")
         }
         console.log(filterData);
         handleFilterData(filterData);

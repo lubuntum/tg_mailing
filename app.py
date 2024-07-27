@@ -56,7 +56,8 @@ def getFilterData():
             'personAgeTo': request.json['personAgeTo'],
             'languages': request.json['languages'],
             'childAgeFrom': request.json['childAgeFrom'],
-            'childAgeTo': request.json['childAgeTo']
+            'childAgeTo': request.json['childAgeTo'],
+            'withoutChild': request.json['withoutChild']
         }
         filteredUserData = filterFunc(originUserData, requestData)
         return render_template('n_table.html', dataUsers = filteredUserData)

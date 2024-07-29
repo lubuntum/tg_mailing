@@ -104,7 +104,7 @@ function handleFormData(formData, url) {
         contentType: false,
         success: function(response) {
             console.log(response)
-            alert('Сообщение доставлено!')
+            alert('Выполнено!')
             clearCheckBoxes()
         }
     })

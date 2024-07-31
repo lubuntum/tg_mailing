@@ -8,6 +8,8 @@ firebase_admin.initialize_app(credentials, {'databaseURL': DATABASE_URL})
 def getDataFromDB(path):
     reference = db.reference(path)
     users = reference.get()
+    if not users:
+        return None
     #OLD \/ \/ \/
     # for i in usersDataRaw:
     #     usersDataFormat.append([usersDataRaw[i]['userId'],

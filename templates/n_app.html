@@ -117,8 +117,9 @@
                     <th>Дата</th>
                 </tr>
             </thead>
-        
+            {% if dataUsers and dataUsers|length > 0 %}
             <tbody>
+
                 {% for i in dataUsers %}
                 <tr class="align-middle">
                     <td><input type="checkbox" class="user-checkbox" id="user-checkbox" data-row="{{ loop.index0 }}"></td>
@@ -164,7 +165,9 @@
                     <td>{{ dataUsers[i].date.replace(' ', '<br>') | safe }}</td>
                 </tr>
                 {% endfor %}
+
             </tbody>
+            {% endif %}
         </table>
     </div>
 
